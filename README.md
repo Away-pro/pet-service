@@ -168,13 +168,7 @@ python main.py
 ## 🌐 在线部署
 项目已部署上线，访问地址：
 - 用户端：https://chengzheng.xyz
-- 商家端：[你的商家端地址，如 https://chengzheng.xyz/admin]
 
----
-
-## 📝 备案信息
-- ICP备案号：**渝ICP备2026005681号-1**
-- 版权所有：© 2026 宠伴朝夕
 
 ---
 
