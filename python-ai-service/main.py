@@ -21,11 +21,10 @@ app.add_middleware(
 # ==============================================
 # 阿里云API核心配置（你的API Key）
 # ==============================================
-QWEN_API_KEY = "sk-c5e62918f1ae45c0a75b5cdf7a1e40a1"
-TEXT_GENERATION_URL = "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation"
-IMAGE_GENERATION_URL = "https://dashscope.aliyuncs.com/api/v1/services/aigc/text2image/image-synthesis"
+QWEN_API_KEY = " "
+TEXT_GENERATION_URL = " "
+IMAGE_GENERATION_URL = " "
 
-# ✅ 模型映射完全不动
 MODEL_MAPPING = {
     "shop_recommend": "qwen-turbo",
     "smart_customer_service": "qwen-plus",
@@ -40,7 +39,7 @@ MODEL_MAPPING = {
 }
 
 # ==============================================
-# AI请求函数（完全不动）
+# AI请求函数
 # ==============================================
 def call_qwen_api(model: str, messages: List[Dict], params: Optional[Dict] = None) -> Dict:
     try:
@@ -62,7 +61,7 @@ def call_qwen_api(model: str, messages: List[Dict], params: Optional[Dict] = Non
             "parameters": params
         }
         
-        # 超时40秒完全不动
+        # 超时40秒
         response = requests.post(TEXT_GENERATION_URL, headers=headers, json=payload, timeout=40)
         
         print(f"API请求状态码：{response.status_code}")
@@ -90,7 +89,7 @@ def call_qwen_api(model: str, messages: List[Dict], params: Optional[Dict] = Non
         return {"code": 500, "data": "AI繁忙，请稍后重试"}
 
 # ==============================================
-# 数据模型（完全不动）
+# 数据模型
 # ==============================================
 class ShopRecommendRequest(BaseModel):
     user_demand: str = Field(..., min_length=1, description="用户商品需求描述")
@@ -133,10 +132,10 @@ class MerchantReplyRequest(BaseModel):
     context: Optional[str] = Field(None, description="对话上下文")
 
 # ==============================================
-# 客户端AI功能（仅修改文案助手，其他完全不动）
+# 客户端AI功能
 # ==============================================
 
-# 1. AI商品推荐（完全不动）
+# 1. AI商品推荐
 @app.post("/ai/shop_recommend")
 async def shop_recommend(request: ShopRecommendRequest):
     try:
@@ -200,7 +199,7 @@ async def smart_customer_service(request: CustomerServiceRequest):
         print(f"客服接口异常：{e}")
         return {"code": 200, "data": "AI客服暂时繁忙，请切换人工客服"}
 
-# 3. 宠物健康诊断（完全不动）
+# 3. 宠物健康诊断
 @app.post("/ai/pet_health_assessment")
 async def pet_health_assessment(request: PetHealthRequest):
     try:
@@ -230,7 +229,7 @@ async def boarding_order_review(request: BoardingOrderRequest):
         print(f"订单审核异常：{e}")
         return {"code": 500, "data": "订单审核异常"}
 
-# 5. 内容审核（完全不动）
+# 5. 内容审核
 @app.post("/ai/content_safety_check")
 async def content_safety_check(request: ContentSafetyRequest):
     try:
@@ -248,7 +247,7 @@ async def content_safety_check(request: ContentSafetyRequest):
         return {"code": 500, "data": "内容审核异常"}
 
 # ==============================================
-# ✅ 仅修改这一个文案助手函数，其他完全不动
+#  文案助手函数
 # ==============================================
 @app.post("/ai/post_writing_assistant")
 async def post_writing_assistant(request: PostWritingRequest):
@@ -295,10 +294,10 @@ async def pet_avatar_generation(request: PetAvatarRequest):
         return {"code": 500, "data": "头像生成失败"}
 
 # ==============================================
-# 商家后台AI功能（完全不动）
+# 商家后台AI功能
 # ==============================================
 
-# 8. 数据总结（完全不动）
+# 8. 数据总结
 @app.post("/ai/data_dashboard_summary")
 async def data_dashboard_summary(request: DataDashboardRequest):
     try:
@@ -372,7 +371,7 @@ async def smart_customer_service(request: CustomerServiceRequest):
         print(f"客服接口异常：{e}")
         return {"code": 200, "data": "AI客服暂时繁忙，请切换人工客服"}
 
-# 健康检查（完全不动）
+# 健康检查
 @app.get("/health")
 async def health_check():
     return {"status": "healthy", "message": "AI服务运行正常"}
